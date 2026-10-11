@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesan Kamar — Kost An-nur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="tambahan.css">
+<style>
+  .order-wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+  .order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .order-grid .full { grid-column: 1 / -1; }
+  .field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 12px 14px; font: inherit; font-size: 15px;
+    border: 1px solid #c9c9c9; border-radius: 8px; background: #fff; color: #222;
+    box-sizing: border-box;
+  }
+  .field textarea { min-height: 90px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid #b08d57; border-color: #b08d57; }
+  .order-summary {
+    margin: 22px 0; padding: 16px 18px; border-radius: 10px;
+    background: rgba(176,141,87,.12); border: 1px solid rgba(176,141,87,.4); color: inherit;
+  }
+  .order-summary p { margin: 4px 0; }
+  .order-summary .total { font-size: 18px; font-weight: 600; }
+  .order-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .order-success {
+    display: none; padding: 22px; border-radius: 10px; text-align: center;
+    background: rgba(60,160,90,.12); border: 1px solid rgba(60,160,90,.45);
+  }
+  .order-success h3 { margin-top: 0; }
+  @media (max-width: 600px) { .order-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="page-sub">
+<header id="siteHeader" class="site-header">
+  <nav>
+    <a href="index.html" class="brand">Kost <span>An-nur</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="nav-link">Beranda</a>
+
+      <div class="has-dd">
+        <a href="kamar.html" class="nav-link active">Kamar</a>
+        <button type="button" class="dd-arrow" aria-label="Buka submenu Kamar" aria-expanded="false"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu">
+          <a href="kamar.html#kamar">Tipe &amp; Harga</a>
+          <a href="kamar.html#Fasilitas">Fasilitas</a>
+          <a href="kamar.html#galeri">Galeri Foto</a>
+        </div>
+      </div>
+
+      <div class="has-dd">
+        <a href="kontak.html" class="nav-link">Kontak</a>
+        <button type="button" class="dd-arrow" aria-label="Buka submenu Kontak" aria-expanded="false"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu">
+          <a href="kontak.html#kontak">Hubungi Kami</a>
+          <a href="kontak.html#lokasi">Lokasi &amp; Peta</a>
+          <a href="kontak.html#faq">Peraturan &amp; FAQ</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a href="pesan.html" class="btn btn-solid">Pesan Sekarang</a>
+      <button class="burger" id="burgerBtn" aria-label="Buka menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<section class="page-banner" style="--banner-img:url('kamar keseluruhan.jpeg')">
+  <div class="container">
+    <p class="eyebrow">Kost An-nur</p>
+    <h1>Pesan Kamar</h1>
+    <p>Isi form di bawah ini, kami akan menghubungi Anda untuk konfirmasi.</p>
+  </div>
+</section>
+
+<section id="pesan">
+  <div class="order-wrap">
+
+    <form id="orderForm" novalidate>
+      <div class="order-grid">
+        <div class="field full">
+          <label for="tipe">Tipe Kamar</label>
+          <select id="tipe" name="tipe" required>
+            <option value="">-- Pilih tipe kamar --</option>
+            <option value="reguler" data-nama="Kamar Kipas Reguler (Kecil)" data-harga="500000">Kamar Kipas Reguler (Kecil) - Rp500.000 / bulan</option>
+            <option value="luas" data-nama="Kamar Kipas Luas (Besar)" data-harga="800000">Kamar Kipas Luas (Besar) - Rp800.000 / bulan</option>
+            <option value="ac" data-nama="Kamar AC" data-harga="1200000">Kamar AC - Rp1.200.000 / bulan</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" placeholder="Nama sesuai identitas" required>
+        </div>
+
+        <div class="field">
+          <label for="hp">No. WhatsApp</label>
+          <input type="tel" id="hp" name="hp" placeholder="08xxxxxxxxxx" required>
+        </div>
+
+        <div class="field">
+          <label for="status">Status Penghuni</label>
+          <select id="status" name="status" required>
+            <option value="">-- Pilih --</option>
+            <option value="Putri (Mahasiswi/Pekerja)">Putri (Mahasiswi / Pekerja)</option>
+            <option value="Pasangan Suami Istri">Pasangan Suami Istri</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="tanggal">Tanggal Mulai Menempati</label>
+          <input type="date" id="tanggal" name="tanggal" required>
+        </div>
+
+        <div class="field">
+          <label for="durasi">Lama Sewa</label>
+          <select id="durasi" name="durasi" required>
+            <option value="1">1 bulan</option>
+            <option value="3">3 bulan</option>
+            <option value="6">6 bulan</option>
+            <option value="12">12 bulan</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="catatan">Catatan (opsional)</label>
+          <textarea id="catatan" name="catatan" placeholder="Contoh: bawa motor, ingin survei lokasi dulu, dll."></textarea>
+        </div>
+      </div>
+
+      <div class="order-summary" id="summary" aria-live="polite">
+        <p>Pilih tipe kamar untuk melihat perkiraan biaya.</p>
+      </div>
+
+      <div class="order-actions">
+        <button type="submit" class="btn btn-solid" id="btnKirim">Kirim Pesanan</button>
+        <a href="kamar.html" class="btn">Kembali ke Daftar Kamar</a>
+      </div>
+    </form>
+
+    <div class="order-success" id="success">
+      <h3>Pesanan Anda sudah diterima</h3>
+      <p id="successText"></p>
+      <p>Pengelola akan menghubungi Anda lewat WhatsApp untuk konfirmasi ketersediaan kamar dan pembayaran.</p>
+      <a href="index.html" class="btn btn-solid">Kembali ke Beranda</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container foot-grid">
+    <div>
+      <a href="index.html" class="brand">Kost <span>An-nur</span></a>
+      <p>Hunian nyaman, rasa rumah. Kost khusus putri dan pasutri di Makassar.</p>
+    </div>
+    <div>
+      <strong>Kontak &amp; Lokasi</strong>
+      <a href="kontak.html#kontak">Hubungi Kami</a>
+      <a href="kontak.html#lokasi">Lokasi &amp; Peta</a>
+    </div>
+  </div>
+  <p class="foot-copy">&copy; <span id="year"></span> Kost <span>An-nur</span>. Dibuat dengan hangat untuk Anda yang mencari rumah kedua.</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="script.js"></script>
+<script src="nav.js"></script>
+<script>
+(function () {
+  var form    = document.getElementById('orderForm');
+  var tipe    = document.getElementById('tipe');
+  var durasi  = document.getElementById('durasi');
+  var tanggal = document.getElementById('tanggal');
+  var summary = document.getElementById('summary');
+  var success = document.getElementById('success');
+  var successText = document.getElementById('successText');
+  var btnKirim = document.getElementById('btnKirim');
+
+  var today = new Date();
+  tanggal.min = today.getFullYear() + '-' +
+                String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                String(today.getDate()).padStart(2, '0');
+
+  var param = new URLSearchParams(window.location.search).get('kamar');
+  if (param) { tipe.value = param; }
+
+  function rupiah(n) { return 'Rp' + n.toLocaleString('id-ID'); }
+
+  function updateSummary() {
+    var opt = tipe.options[tipe.selectedIndex];
+    if (!opt || !opt.value) {
+      summary.innerHTML = '<p>Pilih tipe kamar untuk melihat perkiraan biaya.</p>';
+      return;
+    }
+    var harga = parseInt(opt.dataset.harga, 10);
+    var bulan = parseInt(durasi.value, 10);
+    summary.innerHTML =
+      '<p><strong>' + opt.dataset.nama + '</strong></p>' +
+      '<p>Harga: ' + rupiah(harga) + ' / bulan x ' + bulan + ' bulan</p>' +
+      '<p class="total">Perkiraan total: ' + rupiah(harga * bulan) + '</p>' +
+      '<p><small>Belum termasuk listrik &amp; gas.</small></p>';
+  }
+
+  tipe.addEventListener('change', updateSummary);
+  durasi.addEventListener('change', updateSummary);
+  updateSummary();
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var nama   = document.getElementById('nama').value.trim();
+    var hp     = document.getElementById('hp').value.trim();
+    var status = document.getElementById('status').value;
+
+    if (!tipe.value || !nama || !hp || !status || !tanggal.value) {
+      alert('Mohon lengkapi semua data yang wajib diisi.');
+      return;
+    }
+    if (!/^[0-9+\s-]{9,16}$/.test(hp)) {
+      alert('Nomor WhatsApp tidak valid.');
+      return;
+    }
+
+    var opt = tipe.options[tipe.selectedIndex];
+    var pesanan = {
+      tipe: tipe.value,
+      nama: nama,
+      hp: hp,
+      status: status,
+      tanggal: tanggal.value,
+      durasi: durasi.value,
+      catatan: document.getElementById('catatan').value.trim()
+    };
+
+    btnKirim.disabled = true;
+    btnKirim.textContent = 'Mengirim...';
+
+    fetch('api/simpan-pesanan.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(pesanan)
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (hasil) {
+      if (!hasil.ok) { throw new Error(hasil.pesan || 'Gagal mengirim pesanan.'); }
+      form.style.display = 'none';
+      successText.textContent = 'Terima kasih, ' + nama + '. Pesanan ' + opt.dataset.nama +
+        ' mulai ' + pesanan.tanggal + ' untuk ' + pesanan.durasi + ' bulan telah kami terima.';
+      success.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(function (err) {
+      alert(err.message || 'Terjadi kesalahan. Silakan coba lagi.');
+      btnKirim.disabled = false;
+      btnKirim.textContent = 'Kirim Pesanan';
+    });
+  });
+})();
+</script>
+</body>
+</html>
